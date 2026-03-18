@@ -21,3 +21,15 @@ INSERT INTO instructors (instructor_name, email) VALUES
                                                      ('Laurent Mekies', 'laurent.mekies@f1academy.com'),
                                                      ('James Vowles', 'james.vowles@f1academy.com'),
                                                      ('Mike Krack', 'mike.krack@f1academy.com');
+
+INSERT INTO courses (course_name, description, instructor_id) VALUES
+                                                   ('F1 Car Engineering Basics', 'Introduction to Formula 1 car design and core engineering principles.', 1),
+                                                   ('Aerodynamics in F1', 'Understanding airflow, downforce, and drag in Formula 1 cars.', 2),
+                                                   ('Race Strategy Management', 'Learning pit stop timing, tire strategy, and race decision-making.', 3),
+                                                   ('F1 Power Units', 'Deep dive into hybrid engines, ERS, and energy recovery systems.', 4),
+                                                   ('Telemetry and Data Analysis', 'Analyzing real-time data to improve car performance.', 5),
+                                                   ('F1 Regulations and Rules', 'Understanding FIA regulations, penalties, and race governance.', 6),
+                                                   ('Tire Technology and Management', 'Studying tire compounds, degradation, and performance strategies.', 7),
+                                                   ('Track Dynamics and Racing Lines', 'Optimizing driving lines and cornering techniques on circuits.', 8),
+                                                   ('F1 Team Operations', 'Exploring roles within a Formula 1 team and race weekend logistics.', 9),
+                                                   ('Simulation and Driver Training', 'Using simulators to enhance driver performance and consistency.', 10);
