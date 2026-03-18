@@ -15,7 +15,7 @@ public interface InstructorRepository {
             @Result(property = "email", column = "email")
     })
     @Select("""
-            SELECT * FROM instructors
+            SELECT * FROM instructors OFFSET #{offset} LIMIT #{size} 
             """)
     List<Instructor> getAllInstructors(Integer offset, Integer size);
 
