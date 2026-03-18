@@ -1,0 +1,12 @@
+package org.me._1_cheam_norakpanha_pvh_spring_homework002.model.request;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class StudentRequest {
+    
+}
