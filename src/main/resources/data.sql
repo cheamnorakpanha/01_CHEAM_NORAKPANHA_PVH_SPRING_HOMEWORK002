@@ -9,3 +9,15 @@ INSERT INTO students (student_name, email, phone_number) VALUES
                                                              ('Sergio Perez', 'sergio.perez@f1mail.com', '061888888'),
                                                              ('Oscar Piastri', 'oscar.piastri@f1mail.com', '017999999'),
                                                              ('Yuki Tsunoda', 'yuki.tsunoda@f1mail.com', '070101010');
+
+INSERT INTO instructors (instructor_name, email) VALUES
+                                                     ('Toto Wolff', 'toto.wolff@f1academy.com'),
+                                                     ('Christian Horner', 'christian.horner@f1academy.com'),
+                                                     ('Fred Vasseur', 'fred.vasseur@f1academy.com'),
+                                                     ('Zak Brown', 'zak.brown@f1academy.com'),
+                                                     ('Andrea Stella', 'andrea.stella@f1academy.com'),
+                                                     ('Guenther Steiner', 'guenther.steiner@f1academy.com'),
+                                                     ('Otmar Szafnauer', 'otmar.szafnauer@f1academy.com'),
+                                                     ('Laurent Mekies', 'laurent.mekies@f1academy.com'),
+                                                     ('James Vowles', 'james.vowles@f1academy.com'),
+                                                     ('Mike Krack', 'mike.krack@f1academy.com');
