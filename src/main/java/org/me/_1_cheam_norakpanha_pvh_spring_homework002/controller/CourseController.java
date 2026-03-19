@@ -61,22 +61,48 @@ public class CourseController {
 
         Course courses = courseService.createNewCourse(request);
 
-//        ApiResponse<Instructor> response = ApiResponse.<Instructor>builder()
-//                .success(true)
-//                .status(HttpStatus.CREATED.value())
-//                .message("Instructors created successfully")
-//                .payload(instructors)
-//                .timestamp(Instant.now())
-//                .build();
+        ApiResponse<Course> response = ApiResponse.<Course>builder()
+                .success(true)
+                .status(HttpStatus.CREATED.value())
+                .message("Courses created successfully")
+                .payload(courses)
+                .timestamp(Instant.now())
+                .build();
 
-//        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-
-        return null;
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @Operation(summary = "Update course by ID")
+    @PutMapping("/{course-id}")
+    public ResponseEntity<ApiResponse<Course>> updateCourseById(@PathVariable("course-id") Long courseId, @RequestBody CourseRequest request) {
 
+        Course courses = courseService.updateCourseById(courseId, request);
 
+        ApiResponse<Course> response = ApiResponse.<Course>builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .message("Courses updated successfully")
+                .payload(courses)
+                .timestamp(Instant.now())
+                .build();
 
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 
+    @Operation(summary = "Delete course by ID")
+    @DeleteMapping("/{course-id}")
+    public ResponseEntity<ApiResponse<Course>> deleteCourseById(@PathVariable("course-id") Long courseId) {
 
+        int courses = courseService.deleteCourseById(courseId);
+
+        ApiResponse<Course> response = ApiResponse.<Course>builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .message("Courses deleted successfully")
+//                .payload(courses)
+                .timestamp(Instant.now())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }

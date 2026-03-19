@@ -33,3 +33,4 @@ INSERT INTO courses (course_name, description, instructor_id) VALUES
                                                    ('Track Dynamics and Racing Lines', 'Optimizing driving lines and cornering techniques on circuits.', 8),
                                                    ('F1 Team Operations', 'Exploring roles within a Formula 1 team and race weekend logistics.', 9),
                                                    ('Simulation and Driver Training', 'Using simulators to enhance driver performance and consistency.', 10);
+
