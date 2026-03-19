@@ -1,7 +1,6 @@
 package org.me._1_cheam_norakpanha_pvh_spring_homework002.service.Impl;
 
 import org.me._1_cheam_norakpanha_pvh_spring_homework002.model.entity.Course;
-import org.me._1_cheam_norakpanha_pvh_spring_homework002.model.entity.Instructor;
 import org.me._1_cheam_norakpanha_pvh_spring_homework002.model.request.CourseRequest;
 import org.me._1_cheam_norakpanha_pvh_spring_homework002.repository.CourseRepository;
 import org.me._1_cheam_norakpanha_pvh_spring_homework002.service.CourseService;
@@ -34,5 +33,15 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course createNewCourse(CourseRequest request) {
         return courseRepository.createNewCourse(request);
+    }
+
+    @Override
+    public Course updateCourseById(Long courseId, CourseRequest request) {
+        return courseRepository.updateCourseById(courseId, request);
+    }
+
+    @Override
+    public int deleteCourseById(Long courseId) {
+        return courseRepository.deleteCourseById(courseId);
     }
 }

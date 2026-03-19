@@ -2,7 +2,6 @@ package org.me._1_cheam_norakpanha_pvh_spring_homework002.repository;
 
 import org.apache.ibatis.annotations.*;
 import org.me._1_cheam_norakpanha_pvh_spring_homework002.model.entity.Course;
-import org.me._1_cheam_norakpanha_pvh_spring_homework002.model.entity.Instructor;
 import org.me._1_cheam_norakpanha_pvh_spring_homework002.model.request.CourseRequest;
 
 import java.util.List;
@@ -34,4 +33,17 @@ public interface CourseRepository {
             RETURNING *
             """)
     Course createNewCourse(@Param("req") CourseRequest request);
+
+    @ResultMap("courseMapper")
+    @Select("""
+            UPDATE courses
+            SET course_name = #{req.courseName}, description = #{req.description}, instructor_id = #{req.instructor.instructorId}
+            WHERE course_id = #{courseId} RETURNING *
+            """)
+    Course updateCourseById(Long courseId, @Param("req") CourseRequest request);
+
+    @Delete("""
+            DELETE FROM courses WHERE course_id = #{courseId} RETURNING *
+            """)
+    int deleteCourseById(Long courseId);
 }
