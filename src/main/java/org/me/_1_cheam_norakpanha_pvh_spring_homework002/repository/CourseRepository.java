@@ -45,5 +45,5 @@ public interface CourseRepository {
     @Delete("""
             DELETE FROM courses WHERE course_id = #{courseId} RETURNING *
             """)
-    int deleteCourseById(Long courseId);
+    Course deleteCourseById(Long courseId);
 }

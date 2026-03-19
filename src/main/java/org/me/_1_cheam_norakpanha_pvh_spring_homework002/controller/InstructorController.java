@@ -100,7 +100,7 @@ public class InstructorController {
                 .success(true)
                 .status(HttpStatus.OK.value())
                 .message("Instructors deleted successfully")
-//                .payload(instructors)
+                .payload(instructors)
                 .timestamp(Instant.now())
                 .build();
 

@@ -93,13 +93,13 @@ public class CourseController {
     @DeleteMapping("/{course-id}")
     public ResponseEntity<ApiResponse<Course>> deleteCourseById(@PathVariable("course-id") Long courseId) {
 
-        int courses = courseService.deleteCourseById(courseId);
+        Course courses = courseService.deleteCourseById(courseId);
 
         ApiResponse<Course> response = ApiResponse.<Course>builder()
                 .success(true)
                 .status(HttpStatus.OK.value())
                 .message("Courses deleted successfully")
-//                .payload(courses)
+                .payload(courses)
                 .timestamp(Instant.now())
                 .build();
 
