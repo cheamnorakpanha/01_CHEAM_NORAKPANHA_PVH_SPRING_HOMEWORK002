@@ -1,8 +1,8 @@
 package org.me._1_cheam_norakpanha_pvh_spring_homework002.controller;
 
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import org.me._1_cheam_norakpanha_pvh_spring_homework002.model.entity.Student;
+import org.me._1_cheam_norakpanha_pvh_spring_homework002.model.request.StudentRequest;
 import org.me._1_cheam_norakpanha_pvh_spring_homework002.model.response.ApiResponse;
 import org.me._1_cheam_norakpanha_pvh_spring_homework002.service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -55,12 +55,56 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @Operation(summary = "")
+    @Operation(summary = "Create a new student")
     @PostMapping
-    public ResponseEntity<ApiResponse<List<Student>>> createNewStudent() {
+    public ResponseEntity<ApiResponse<Student>> createNewStudent(@RequestBody StudentRequest request) {
 
+        Student students = studentService.createNewStudent(request);
 
-        return null;
+        ApiResponse<Student> response = ApiResponse.<Student>builder()
+                .success(true)
+                .status(HttpStatus.CREATED.value())
+                .message("Students created successfully")
+                .payload(students)
+                .timestamp(Instant.now())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
+    @Operation(summary = "Update student by ID")
+    @PutMapping("/{student-id}")
+    public ResponseEntity<ApiResponse<Student>> updateStudentById(@PathVariable("student-id") Long studentId, @RequestBody StudentRequest request) {
+
+        Student students = studentService.updateStudentById(studentId, request);
+
+        ApiResponse<Student> response = ApiResponse.<Student>builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .message("Students updated successfully")
+                .payload(students)
+                .timestamp(Instant.now())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @Operation(summary = "Delete student by ID")
+    @DeleteMapping("/{student-id}")
+    public ResponseEntity<ApiResponse<Student>> deleteStudentById(@PathVariable("student-id") Long studentId) {
+
+        Student students = studentService.deleteStudentById(studentId);
+
+        ApiResponse<Student> response = ApiResponse.<Student>builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .message("Students deleted successfully")
+                .payload(students)
+                .timestamp(Instant.now())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 
 }

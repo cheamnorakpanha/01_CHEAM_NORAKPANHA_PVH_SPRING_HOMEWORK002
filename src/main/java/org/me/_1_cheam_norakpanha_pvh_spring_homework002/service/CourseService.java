@@ -17,5 +17,5 @@ public interface CourseService {
 
     Course updateCourseById(Long courseId, CourseRequest request);
 
-    int deleteCourseById(Long courseId);
+    Course deleteCourseById(Long courseId);
 }
