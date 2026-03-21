@@ -29,7 +29,7 @@ public interface CourseRepository {
     @ResultMap("courseMapper")
     @Select("""
             INSERT INTO courses (course_name, description, instructor_id)
-            VALUES (#{req.courseName}, #{req.description}, #{req.instructor.instructorId})
+            VALUES (#{req.courseName}, #{req.description}, #{req.instructorId})
             RETURNING *
             """)
     Course createNewCourse(@Param("req") CourseRequest request);
@@ -37,13 +37,14 @@ public interface CourseRepository {
     @ResultMap("courseMapper")
     @Select("""
             UPDATE courses
-            SET course_name = #{req.courseName}, description = #{req.description}, instructor_id = #{req.instructor.instructorId}
+            SET course_name = #{req.courseName}, description = #{req.description}, instructor_id = #{req.instructorId}
             WHERE course_id = #{courseId} RETURNING *
             """)
     Course updateCourseById(Long courseId, @Param("req") CourseRequest request);
 
-    @Delete("""
-            DELETE FROM courses WHERE course_id = #{courseId} RETURNING *
+    @Select("""
+                DELETE FROM courses WHERE course_id = #{courseId} RETURNING *
             """)
+    @ResultMap("courseMapper")
     Course deleteCourseById(Long courseId);
 }

@@ -23,14 +23,14 @@ public class CourseController {
 
     @Operation(summary = "Get all courses")
     @GetMapping
-    public ResponseEntity<ApiResponse<List<Course>>> getAllCourses(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+    public ResponseEntity<ApiResponse<List<Course>>> getAllCourses(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
 
         List<Course> courses = courseService.getAllCourses(page, size);
 
         ApiResponse<List<Course>> response = ApiResponse.<List<Course>>builder()
                 .success(true)
                 .status(HttpStatus.OK.value())
-                .message("Courses retrieved successfully")
+                .message("Courses fetched successfully")
                 .payload(courses)
                 .timestamp(Instant.now())
                 .build();
@@ -91,15 +91,14 @@ public class CourseController {
 
     @Operation(summary = "Delete course by ID")
     @DeleteMapping("/{course-id}")
-    public ResponseEntity<ApiResponse<Course>> deleteCourseById(@PathVariable("course-id") Long courseId) {
+    public ResponseEntity<ApiResponse<String>> deleteCourseById(@PathVariable("course-id") Long courseId) {
 
-        Course courses = courseService.deleteCourseById(courseId);
+        courseService.deleteCourseById(courseId);
 
-        ApiResponse<Course> response = ApiResponse.<Course>builder()
+        ApiResponse<String> response = ApiResponse.<String>builder()
                 .success(true)
                 .status(HttpStatus.OK.value())
                 .message("Courses deleted successfully")
-                .payload(courses)
                 .timestamp(Instant.now())
                 .build();
 
