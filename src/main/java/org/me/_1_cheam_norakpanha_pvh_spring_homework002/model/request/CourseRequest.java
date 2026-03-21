@@ -11,5 +11,5 @@ import org.me._1_cheam_norakpanha_pvh_spring_homework002.model.entity.Instructor
 public class CourseRequest {
     private String courseName;
     private String description;
-    private Instructor instructor;
+    private Long instructorId;
 }

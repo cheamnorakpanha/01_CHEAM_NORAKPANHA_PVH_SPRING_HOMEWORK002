@@ -23,7 +23,7 @@ public class StudentController {
 
     @Operation(summary = "Get all students")
     @GetMapping
-    public ResponseEntity<ApiResponse<List<Student>>> getAllStudents(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+    public ResponseEntity<ApiResponse<List<Student>>> getAllStudents(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
 
         List<Student> students = studentService.getAllStudents(page, size);
 
@@ -91,15 +91,14 @@ public class StudentController {
 
     @Operation(summary = "Delete student by ID")
     @DeleteMapping("/{student-id}")
-    public ResponseEntity<ApiResponse<Student>> deleteStudentById(@PathVariable("student-id") Long studentId) {
+    public ResponseEntity<ApiResponse<String>> deleteStudentById(@PathVariable("student-id") Long studentId) {
 
-        Student students = studentService.deleteStudentById(studentId);
+        studentService.deleteStudentById(studentId);
 
-        ApiResponse<Student> response = ApiResponse.<Student>builder()
+        ApiResponse<String> response = ApiResponse.<String>builder()
                 .success(true)
                 .status(HttpStatus.OK.value())
                 .message("Students deleted successfully")
-                .payload(students)
                 .timestamp(Instant.now())
                 .build();
 
