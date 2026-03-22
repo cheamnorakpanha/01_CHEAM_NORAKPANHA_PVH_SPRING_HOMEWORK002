@@ -28,6 +28,15 @@ public interface CourseRepository {
 
     @ResultMap("courseMapper")
     @Select("""
+            SELECT c.*
+            FROM courses c
+            INNER JOIN student_course sc ON c.course_id = sc.course_id
+            WHERE sc.student_id = #{studentId}
+            """)
+    List<Course> getCoursesByStudentId(Long studentId);
+
+    @ResultMap("courseMapper")
+    @Select("""
             INSERT INTO courses (course_name, description, instructor_id)
             VALUES (#{req.courseName}, #{req.description}, #{req.instructorId})
             RETURNING *
@@ -42,9 +51,9 @@ public interface CourseRepository {
             """)
     Course updateCourseById(Long courseId, @Param("req") CourseRequest request);
 
+    @ResultMap("courseMapper")
     @Select("""
                 DELETE FROM courses WHERE course_id = #{courseId} RETURNING *
             """)
-    @ResultMap("courseMapper")
     Course deleteCourseById(Long courseId);
 }

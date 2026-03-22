@@ -31,7 +31,15 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student createNewStudent(StudentRequest request) {
-        return studentRepository.createNewStudent(request);
+
+        Student student = studentRepository.createNewStudent(request);
+
+        for (Long courseId : request.getCourseId()) {
+            studentRepository.insertStudentCourse(student.getStudentId(), courseId);
+        }
+
+
+        return studentRepository.getStundentById(student.getStudentId());
     }
 
     @Override
@@ -40,7 +48,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student deleteStudentById(Long studentId) {
-        return studentRepository.deleteStudentById(studentId);
+    public void deleteStudentById(Long studentId) {
+
+        studentRepository.deleteStudentCourse(studentId);
+
+        studentRepository.deleteStudentById(studentId);
     }
 }

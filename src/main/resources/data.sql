@@ -34,3 +34,14 @@ INSERT INTO courses (course_name, description, instructor_id) VALUES
                                                    ('F1 Team Operations', 'Exploring roles within a Formula 1 team and race weekend logistics.', 9),
                                                    ('Simulation and Driver Training', 'Using simulators to enhance driver performance and consistency.', 10);
 
+INSERT INTO student_course (student_id, course_id) VALUES
+                                                       (1, 1),
+                                                       (2, 2),
+                                                       (3, 3),
+                                                       (4, 4),
+                                                       (5, 5),
+                                                       (6, 6),
+                                                       (7, 7),
+                                                       (8, 8),
+                                                       (9, 9),
+                                                       (10, 10);

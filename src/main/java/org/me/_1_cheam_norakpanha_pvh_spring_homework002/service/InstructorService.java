@@ -17,5 +17,5 @@ public interface InstructorService {
 
     Instructor updateInstructorById(Long instructorId, InstructorRequest request);
 
-    Instructor deleteInstructorById(Long instructorId);
+    void deleteInstructorById(Long instructorId);
 }
