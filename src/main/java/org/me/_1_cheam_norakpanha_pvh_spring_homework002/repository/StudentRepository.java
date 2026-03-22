@@ -12,7 +12,8 @@ public interface StudentRepository {
     @Results(id = "studentMapper", value = {
             @Result(property = "studentId", column = "student_id"),
             @Result(property = "studentName", column = "student_name"),
-            @Result(property = "phoneNumber", column = "phone_number")
+            @Result(property = "phoneNumber", column = "phone_number"),
+            @Result(property = "courses", column = "student_id", many = @Many(select = "org.me._1_cheam_norakpanha_pvh_spring_homework002.repository.CourseRepository.getCoursesByStudentId"))
     })
     @Select("""
             SELECT * FROM students OFFSET #{offset} LIMIT #{size}
@@ -27,9 +28,19 @@ public interface StudentRepository {
 
     @ResultMap("studentMapper")
     @Select("""
-            INSERT INTO students VALUES (default, #{req.studentName}, #{req.email}, #{req.phoneNumber})
+            INSERT INTO students (student_name, email, phone_number)
+            VALUES (#{req.studentName}, #{req.email}, #{req.phoneNumber})
+            RETURNING *
             """)
     Student createNewStudent(@Param("req") StudentRequest request);
+
+    @Insert("""
+                INSERT INTO student_course (student_id, course_id)
+                VALUES (#{studentId}, #{courseId})
+            """)
+    void insertStudentCourse(@Param("studentId") Long studentId,
+                             @Param("courseId") Long courseId);
+
 
     @ResultMap("studentMapper")
     @Select("""
@@ -39,9 +50,14 @@ public interface StudentRepository {
             """)
     Student updateStudentById(Long studentId, @Param("req") StudentRequest request);
 
+    @Delete("""
+            DELETE FROM student_course WHERE student_id = #{studentId}
+            """)
+    void deleteStudentCourse(Long studentId);
+
     @ResultMap("studentMapper")
     @Select("""
-            DELETE FROM students WHERE student_id = #{studentId} RETURNING *
+                DELETE FROM students WHERE student_id = #{studentId} RETURNING *
             """)
     Student deleteStudentById(Long studentId);
 }

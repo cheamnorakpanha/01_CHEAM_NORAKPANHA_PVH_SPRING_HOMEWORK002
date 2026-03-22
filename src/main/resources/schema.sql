@@ -18,3 +18,30 @@ CREATE TABLE IF NOT EXISTS courses (
                                        description TEXT,
                                        instructor_id INT NOT NULL REFERENCES instructors(instructor_id)
 );
+
+CREATE TABLE IF NOT EXISTS student_course (
+                                              student_id INT NOT NULL REFERENCES students(student_id),
+                                              course_id  INT NOT NULL REFERENCES courses(course_id),
+                                              PRIMARY KEY (student_id, course_id)
+);
+
+ALTER TABLE courses
+    DROP CONSTRAINT courses_instructor_id_fkey,
+    ADD CONSTRAINT courses_instructor_id_fkey
+        FOREIGN KEY (instructor_id)
+            REFERENCES instructors(instructor_id)
+            ON DELETE CASCADE;
+
+ALTER TABLE student_course
+    DROP CONSTRAINT student_course_course_id_fkey,
+    ADD CONSTRAINT student_course_course_id_fkey
+        FOREIGN KEY (course_id)
+            REFERENCES courses(course_id)
+            ON DELETE CASCADE;
+
+ALTER TABLE student_course
+    DROP CONSTRAINT student_course_course_id_fkey,
+    ADD CONSTRAINT student_course_course_id_fkey
+        FOREIGN KEY (course_id)
+            REFERENCES courses(course_id)
+            ON DELETE CASCADE;
