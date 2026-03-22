@@ -38,13 +38,21 @@ public class StudentServiceImpl implements StudentService {
             studentRepository.insertStudentCourse(student.getStudentId(), courseId);
         }
 
-
         return studentRepository.getStundentById(student.getStudentId());
     }
 
     @Override
     public Student updateStudentById(Long studentId, StudentRequest request) {
-        return studentRepository.updateStudentById(studentId, request);
+
+        studentRepository.updateStudentById(studentId, request);
+
+        studentRepository.deleteStudentCourse(studentId);
+
+        for (Long courseId: request.getCourseId()) {
+            studentRepository.insertStudentCourse(studentId, courseId);
+        }
+
+        return studentRepository.getStundentById(studentId);
     }
 
     @Override
